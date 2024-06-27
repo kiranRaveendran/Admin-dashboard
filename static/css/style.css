@@ -1,0 +1,32 @@
+
+.anchor {
+    display: block;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.anchor:hover {
+    background-color: rgb(212, 213, 213);
+
+
+}
+
+.LoginForm {
+    margin: 10px;
+}
+
+/* .dashboard_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 15vw;
+    overflow-y: auto; 
+} */
+.roboto-light {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: light;
+  }

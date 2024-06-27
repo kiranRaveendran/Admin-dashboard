@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    
+{% if specialization_data %}
+<div class="main" >
+<table class=" xl:w-[60vw]">
+    <thead >
+        <th class="roboto-light  py-2 ">Sl.No</th>
+        <th class="roboto-light   ">Specialization</th>
+        <th class="roboto-light   ">Edit</th>
+        <th class="roboto-light   ">Action</th>
+    </thead>
+    <tbody id="tbody">
+        {% for items in specialization_data %}
+        <tr>
+            <td class="  px-4 py-2 text-center">{{ forloop.counter}}
+            </td>
+            <td class="  px-4 py-2  text-center">{{ items.name }}
+            </td>
+            <td class="flex justify-center items-center relative  ">
+
+                <form id="edit_form">
+                    <button type="button" edit_id={{items.pk}} id="toggle_edit" class="show-modal bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 sm:px-4 rounded ml-2" 
+                    onclick="Edit_function(event,this.getAttribute('edit_id'))"> Edit</button>
+                </form>
+            </td>
+            
+            <td class="text-center">
+        <button id="delete_spec" data-doctor-id="{{ item.id }}"
+                style="white-space: nowrap;" onclick=" delete_sp_modalremove(this.getAttribute('edit_id'))" edit_id={{items.pk}}
+                class="px-1 sm:px-5 bg-red-500 hover:bg-red-700 text-white font-bold py-1 rounded delete_specialization">
+            Delete
+        </button>
+        <!-- modal -->
+        <div id="delete_spec_modal" tabindex="-1" aria-hidden="true"
+            class="hidden overflow-y-auto overflow-x-hidden flex justify-center items-center fixed top-0 right-0 left-0 z-50 w-full h-full bg-gray-900 bg-opacity-50 modal backdrop fade in">
+            <div class="flex flex-col gap-7 py-5 mx-auto p-4 w-full max-w-xl md:shadow-lg rounded-xl bg-white">
+                <div class="mb-4 text-center">
+                    <p class="text-xl text-gray-700">Are you sure you want to delete?</p>
+                </div>
+                <div class="flex justify-center space-x-4">
+                    <button type="button" onclick="delete_sp_modaladd()"  edit_id={{items.pk}}
+                            class="inline-flex items-center px-4 bg-gray-800 text-white rounded-lg shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cancel-delete-btn">
+                        No
+                    </button>
+                    <button type="button" onclick="delete_function(event)" edit_id={{items.pk}}
+                            class="inline-flex items-center px-4 bg-red-500 text-white rounded-lg shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Yes
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- end of the modal -->
+    </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    
+</table>
+</div>
+{% else %}
+<p>No consultations found.</p>
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+#////////////////////////////////////models.py
+
+
+class SetOffline_ChartPayment(models.Model):
+    Current_date = models.DateField(default=date.today)
+    No_of_questions = models.CharField(max_length=20)
+    online_fee = models.CharField(max_length=100)
+    doctor_name = models.ForeignKey(
+        Doctors, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Dr name "{self.doctor_name}" and fee is {self.online_fee}'
+
+
+class OfflineConsultation(models.Model):
+    doctor_name = models.ForeignKey(Doctors, on_delete=models.CASCADE)
+    no_of_questions = models.CharField(max_length=20)
+    patient_name = models.ForeignKey(Patients, on_delete=models.CASCADE)
+    offline_fee = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'Patient name "{self.patient_name}" and the no of offline question is {self.no_of_questions}'
+
+
+
+#/////////////////////////////////////////views.py   
+
+
+from django.http import JsonResponse
+from .models import SetOffline_ChartPayment
+
+def offline_patient_payment_details(request):
+    form = OfflineConsultationForm()
+    return render(request, 'amount/offline_paymentDetails.html', {'form': form})
+
+
+def get_online_fee_and_questions(request):
+    doctor_id = request.GET.get('doctor_id', None)
+    response = {
+        'online_fee': '',
+        'no_of_questions': ''  # Add this line
+    }
+    if doctor_id:
+        try:
+            offline_chart_payment = SetOffline_ChartPayment.objects.get(doctor_name_id=doctor_id)
+            response['online_fee'] = offline_chart_payment.online_fee
+            response['no_of_questions'] = offline_chart_payment.No_of_questions  # Add this line
+        except SetOffline_ChartPayment.DoesNotExist:
+            response['online_fee'] = 'Not available'
+            response['no_of_questions'] = 'Not available'  # Add this line
+    
+    return JsonResponse(response)
+
+
+#////////////////////////////////////////////////////urls.py 
+
+# urls.py
+from django.urls import path
+from .views import offline_consultation_view, get_online_fee_and_questions
+
+urlpatterns = [
+    path('offline-consultation/', offline_consultation_view, name='offline_consultation'),
+    path('get-online-fee-and-questions/', get_online_fee_and_questions, name='get_online_fee_and_questions'),
+]
+
+#///////////////////////////////////////////////////////forms.py 
+
+# forms.py
+from django import forms
+from .models import OfflineConsultation, SetOffline_ChartPayment
+
+class OfflineConsultationForm(forms.ModelForm):
+    class Meta:
+        model = OfflineConsultation
+        fields = ['doctor_name', 'no_of_questions', 'patient_name', 'offline_fee']
+
+class SetOffline_ChartPaymentForm(forms.ModelForm):
+    class Meta:
+        model = SetOffline_ChartPayment
+        fields = ['Current_date', 'No_of_questions', 'online_fee', 'doctor_name']
+
+
+#///////////////////////////////////////////////////////HTML
+
+<!-- offline_consultation.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Offline Consultation</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Offline Consultation</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#id_doctor_name').change(function(){
+                var doctorId = $(this).val();
+                $.ajax({
+                    url: '{% url "get_online_fee_and_questions" %}', // Update with your URL pattern
+                    data: {
+                        'doctor_id': doctorId
+                    },
+                    success: function (data) {
+                        $('#id_offline_fee').val(data.online_fee);
+                        $('#id_no_of_questions').val(data.no_of_questions); // Add this line
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+#////////////////////////////////////////////////javascript/////
+
+<script type="text/javascript">
+        $(document).ready(function(){
+            $('#id_doctor_name').change(function(){
+                var doctorId = $(this).val();
+                $.ajax({
+                    url: '{% url "get_online_fee" %}', // Update with your URL pattern
+                    data: {
+                        'doctor_id': doctorId
+                    },
+                    success: function (data) {
+                        $('#id_offline_fee').val(data.online_fee);
+                        $('#id_no_of_questions').val(data.no_of_questions);
+                    }
+                });
+            });
+        });
+    </script>

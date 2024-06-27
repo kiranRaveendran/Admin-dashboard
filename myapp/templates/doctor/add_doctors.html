@@ -1,0 +1,163 @@
+{% extends 'doctor_dashboard.html' %}
+{% block heading %}
+<h1 class="text-2xl sm:text-5xl font-semibold text-[#142d4c]  sm:py-4 text-left">ADD DOCTOR</h1>
+{% endblock %}
+{% block doctor %}
+
+<form id="form" class="text-black h-full w-full sm:w-[60vw] flex flex-col items-center py-5 gap-8" action="{% url 'add_doctors' %}"
+    method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="flex flex-col w-full justify-center items-center gap-6 gap-0">
+        <div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+            <div class>
+                <label class="text-xs sm:text-base ">First Name</label>
+                <p class="mt-2">{{form.first_name}}</p>
+            </div>
+            <div class>
+                <label class="text-xs sm:text-base ">Last Name</label>
+                <p class="mt-2">{{form.last_name }}</p>
+            </div>
+            <div class>
+                <label class="text-xs sm:text-base ">Country Code</label>
+                <p class="mt-2">{{form.country_code   }}</p>
+            </div>
+            
+        </div>
+        <div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+            <div class>
+                <div class="flex justify-cener  ">
+                <label class="text-xs sm:text-base ">Mobile</label>
+                <p class="text-xs text-red-500 px-5 mt-1" id="error_msg"></p></div>
+                <p class="mt-2">{{form.mobile }}</p>
+            </div>
+            <div id="date_of_birth">
+                <label class="text-xs sm:text-base ">Date of Birth</label>
+                <p id="id_date_of_birth" class="mt-2">{{form.date_of_birth }}</p>
+            </div>
+            <div class>
+                 <label class="text-xs sm:text-base">Gender</label>
+               <p class=" "> {{form.gender }}</p>
+            </div>
+        </div>
+        <div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+            <div class>
+                <label class="text-xs sm:text-base ">Email</label>
+                <p class="mt-2">{{form.email  }}</p>
+            </div>
+            <div class>
+                <label class="text-xs sm:text-base "> Specialisation</label>
+                <p class="mt-2 ">{{form.specialisation  }}</p>
+            </div>
+            <div class>
+                <label class="text-xs sm:text-base ">Doctor Fee</label>
+                <p class="mt-2">{{form.doctor_fees  }}</p>
+            </div>
+        </div>
+        <div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+            <div class>
+                <label class="text-xs sm:text-base ">Address</label>
+                <p class="mt-2">{{form.address   }}</p>
+            </div>
+            <div class>
+                <label class="text-xs sm:text-base ">Experience</label>
+                <p class="mt-2">{{form.experience   }}</p>
+            </div>
+            <div class="">
+                <label class="text-xs sm:text-base ">Upload a Photo</label>
+                <p class="bg-white rounded-md mt-2 ">{{form.image}}</p>
+            </div>
+        </div>
+        <div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+            
+            <div class>
+                <label class="text-xs sm:text-base ">Qualification</label>
+                <p class="mt-2">{{form.qualification   }}</p>
+            </div>
+            </div>
+
+    </div>
+    <button id="btn1" class="bg-blue-400 rounded-md sm:w-[6 sm:gap-10vw] px-5 py-2 "
+        type="submit">Submit</button>
+</form>
+
+<script>
+  window.onload = function() {
+    var input = document.getElementById('id_date_of_birth');
+    if (input) {
+      input.placeholder = input.placeholder.toUpperCase();
+    }
+  };
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<!-- <script>
+    $('#btn1').click(()=> {
+        console.log('hiiiiii')
+    })
+</script> -->
+
+<!-- 
+<script>
+    const form =document.getElementById('form')
+    form.addEventListener("submit",submithandler)
+    function submithandler(e){
+        e.preventDefault();
+        $.ajax({
+
+            type: 'POST',
+            url:'{% url "add_doctors" %}',
+            data:$("#form").serialize(),
+            dataType: 'json',
+            contentType: false, // Set content type to false for FormData
+            processData: false, // Prevent jQuery from processing the data
+            success:function(data){
+                if (data.msg === 'Success'){
+                    form.reset();
+                    alert('form submited ')
+                    
+                }
+            }
+        })
+    }
+</script> -->
+ 
+<script>
+    const form = document.getElementById('form');
+    form.addEventListener("submit", submithandler);
+    function submithandler(e) {
+        e.preventDefault();
+        var formData = new FormData(form); // Create FormData object from the form
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "add_doctors" %}',
+            data: formData, // Use FormData object
+            dataType: 'json',
+            contentType: false, // Set content type to false for FormData
+            processData: false, // Prevent jQuery from processing the data
+            success: function(data) {
+                if (data.msg === 'Success') {
+                     document.getElementById('error_msg').innerText=''
+                     document.getElementById('mobile_num').style.borderColor=''
+                    alert('Form submitted successfully');
+                    form.reset(); // Reset the form
+                    //location.reload();
+                   // window.location.href = '/add_doctors/';
+                }
+                else{
+                    alert('error')
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                 document.getElementById('mobile_num').style.borderColor='#5e89ff'
+                 document.getElementById('error_msg').innerText='Mobile number is already exist'
+                // Handle error
+            }
+        });
+    }
+</script>
+{% endblock %}
+

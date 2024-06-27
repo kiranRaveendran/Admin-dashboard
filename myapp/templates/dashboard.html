@@ -1,0 +1,320 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png"
+            href="{% static 'images/title logo.png' %}">
+        <link rel="icon" type="image/png" href="/static/images/title logo.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/doctor.css' %}">
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <title>Cure and Save Admin</title>
+
+    </head>
+    <body class="bg-violet-100 overflow-x-hidden  ">
+        <div
+            class="inner_body sm:h-[95vh] h-[120vh] flex flex-col  sm:flex-row  px-3 mt-3  ">
+            <!--list of  options -->
+
+            <div
+                class="button_list h-[90vh] bg-white hidden sm:block fixed top-3 ">
+                <div class="flex justify-center items-center ">
+                    <img class="w-[30vw] sm:w-[13vw] "
+                        src="/static/images/logo.png" alt>
+                </div>
+                <div
+                    class="w-[80vw] sm:w-[20vw]   flex flex-col justify-center items-center gap-2 lg:gap-6 mt-9">
+                    <p class="w-full  sm:text-left px-3 hover:scale-110">
+                        <a
+                            class="anchor text-indigo-900 flex  items-center gap-2 p-2  "
+                            href="{% url 'dashboard' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/home.png" alt>
+                            Dashboard</a></p>
+                    <p
+                        class=" w-full text-center sm:text-left px-3  hover:scale-110">
+                        <a
+                            class="anchor text-indigo-900 flex items-center gap-2 p-2 "
+                            href="{% url 'add_doctors' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/doctor.png"
+                                alt> Doctor</a></p>
+                    <p
+                        class="w-full text-center sm:text-left px-3  hover:scale-110">
+                        <a
+                            class="anchor text-indigo-900 flex items-center gap-2 p-2 "
+                            href="{% url 'view_patients' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/patient.png"
+                                alt> Patient</a></p>
+                    <p
+                        class="w-full text-center sm:text-left px-3  hover:scale-110">
+                        <a
+                            class="anchor text-indigo-900 flex items-center gap-2 p-2 "
+                            href="{% url 'patients_Feedback' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/feedback.png"
+                                alt>
+                            Feedback</a></p>
+                    <p
+                        class="w-full text-center sm:text-left px-3  hover:scale-110">
+                        <a
+                            class="anchor text-indigo-900 flex items-center gap-2 p-2 "
+                            href="{% url 'ongoing_consulations' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/consulting.png"
+                                alt> On
+                            Going Consultation</a></p>
+                    <p
+                        class="w-full text-center sm:text-left px-3  hover:scale-110">
+                        <a
+                            class="anchor text-indigo-900 flex items-center gap-2 p-2 "
+                            href="{% url 'upcoming_consultations' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/consultation.png"
+                                alt>Up
+                            Coming Consultation</a></p>
+                    <p
+                        class="w-full text-center sm:text-left px-3  hover:scale-110">
+                        <a
+                            class="anchor text-indigo-900 flex items-center gap-2 p-2 "
+                            href="{% url 'add_specialization' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/add-specialization.png"
+                                alt>Add
+                            Specialization </a></p>
+                    <p
+                        class="w-full text-center sm:text-left px-3  hover:scale-110">
+                        <a
+                            class="anchor text-indigo-900 flex items-center gap-2 p-2 "
+                            href="{% url 'amount_dashboard' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/money.png"
+                                alt>Amount
+                        </a></p>
+                </div>
+            </div>
+            <div class="md:hidden relative">
+                <button id="menu-toggle" class="text-black focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+            <div id="mobile-menu"
+                class="button_list bg-white lg:hidden sm:block mb-2 lg:mb-0 top-3 left-0 hidden ">
+                <div class="flex justify-center items-center ">
+                    <img class="w-[30vw] sm:w-[13vw] "
+                        src="/static/images/logo.png" alt>
+                </div>
+                <div
+                    class="w-[80vw] sm:w-[20vw]   flex flex-col justify-center items-center gap-2 lg:gap-6 mt-9">
+                    <p class="w-full  sm:text-left px-3 ">
+                        <a
+                            class="anchor text-indigo-900 flex  items-center gap-2 p-2  "
+                            href="{% url 'dashboard' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/home.png" alt>
+                            Dashboard</a></p>
+                    <p class=" w-full text-center sm:text-left px-3 ">
+                        <a
+                            class="anchor text-indigo-900 flex items-center gap-2 p-2 "
+                            href="{% url 'add_doctors' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/doctor.png"
+                                alt> Doctor</a></p>
+                    <p class="w-full text-center sm:text-left px-3 ">
+                        <a
+                            class="anchor text-indigo-900 flex items-center gap-2 p-2 "
+                            href="{% url 'view_patients' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/patient.png"
+                                alt> Patient</a></p>
+                    <p class="w-full text-center sm:text-left px-3 ">
+                        <a
+                            class="anchor text-indigo-900 flex items-center gap-2 p-2 "
+                            href="{% url 'patients_Feedback' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/feedback.png"
+                                alt> Doctor's
+                            Feedback</a></p>
+                    <p class="w-full text-center sm:text-left px-3 ">
+                        <a
+                            class="anchor text-indigo-900 flex items-center gap-2 p-2 "
+                            href="{% url 'ongoing_consulations' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/consulting.png"
+                                alt> On
+                            Going Consultation</a></p>
+                    <p class="w-full text-center sm:text-left px-3 ">
+                        <a
+                            class="anchor text-indigo-900 flex items-center gap-2 p-2 "
+                            href="{% url 'upcoming_consultations' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/consultation.png"
+                                alt>Up
+                            Coming Consultation</a></p>
+                    <p class="w-full text-center sm:text-left px-3 ">
+                        <a
+                            class="anchor text-indigo-900 flex items-center gap-2 p-2 "
+                            href="{% url 'add_specialization' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/add-specialization.png"
+                                alt>Add
+                            Specialization </a></p>
+                    <p class="w-full text-center sm:text-left px-3 ">
+                        <a
+                            class="anchor text-indigo-900 flex items-center gap-2 p-2 "
+                            href="{% url 'amount_dashboard' %}">
+                            <img class="w-[3vw] sm:h-[4vh] sm:w-[2vw]"
+                                src="/static/images/dashboard/money.png"
+                                alt>Amount
+                        </a></p>
+                </div>
+            </div>
+            <!--cards -->
+            {% block content %}
+            <div
+                class=" w-full h-max  flex flex-col items-center gap-4  px-5 rounded-sm lg:ml-[20vw] ml-0">
+                <div
+                    class="top_bar bg-white    w-full shadow-md  flex justify-end gap-2 items-center px-4  rounded-md">
+
+                    <!-- Modal Structure -->
+                    {% include 'Admin_rest.html' %}
+                    <div class="   flex items-center gap-1 h-[9vh]">
+                        <div
+                            class="flex justify-center items-center relative">
+                            <button id="toggleButton"
+                                class="border hover:bg-blue-300 text-white font-bold py-2 px-2 rounded-full transition duration-700 ease-in-out ...">
+                                <img class=" rounded-full w-[2vw]"
+                                    src="/static/images/logout/logging-out-2355227_1280.webp"
+                                    alt>
+                            </button>
+                            <div id="hiddenButtonsContainer"
+                                class="hidden   bg-[#375450]  rounded-md w-[30vw]  sm:w-[15vw]  flex flex-col gap-5 text-white  absolute top-7 sm:top-11 right-1 shadow-md transition delay-150 hover:scale-110 duration-300 ...">
+                                <!--logout Hidden buttons -->
+
+                                <div
+                                    class="py-2 h-[6vh] relative rounded-t-md flex  justify-center bg-[#5a7571]">
+                                    <img
+                                        class="rounded-full bg-white w-[3vw] border-black absolute top-4"
+                                        src="/static/images/title logo.png"
+                                        alt>
+
+                                </div>
+                                <h1
+                                    class="text-xs px-5 text-white font-bold">Admin</h1>
+
+                                <a href="{% url 'logout' %}">
+                                    <button
+                                        class=" text-white  text-xs  rounded mb-2 block transition ease-in-out delay-150   hover:-translate-y-1 hover:scale-110  px-5 duration-300 ...">
+                                        <i class="fas fa-sign-out"></i> Sign
+                                        out
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="w-full h-full flex flex-col  gap-5  ">
+
+                    <!--dasboard heading -->
+
+                    <h1
+                        class="text-4xl sm:text-5xl font-semibold text-[#142d4c] py-4 sm:py-9 text-center">
+                        DASHBOARD</h1>
+                    <div
+                        class="child1  flex flex-col items-center justify-center sm:flex-row gap-5 text-center">
+
+                        <a href="{% url 'add_doctors' %}"
+                            class="anchor w-[60vw] sm:w-[18vw] h-[10vh] sm:h-[15vh] shadow-md p-2 bg-zinc-50 rounded-md flex items-center justify-between sm:justify-center gap-5">
+                            <p
+                                class=" lg:font-semibold text-xs lg:text-base text-slate-600 ">DOCTOR</p>
+                            <img
+                                class="w-[5vw] sm:w-[3vw] shadow shadow-yellow-700 shadow-lg rounded-full py-2 px-1"
+                                src="/static/images/doctor.svg" alt>
+                        </a>
+                        <a href="{% url 'add_specialization' %}"
+                            class="anchor  w-[60vw] sm:w-[18vw] h-[10vh] sm:h-[15vh] shadow-md p-2 bg-zinc-50 rounded-md flex items-center justify-between sm:justify-center gap-5">
+                            <p
+                                class=" lg:font-semibold text-xs lg:text-base text-slate-600">
+                                SPECIALIZATION</p>
+                            <img
+                                class="w-[5vw] sm:w-[3vw] shadow shadow-blue-700 shadow-lg rounded-full py-2 px-1"
+                                src="/static/images/spcialization.png" alt>
+                        </a>
+                        <a href="{% url 'view_patients' %}"
+                            class="anchor  w-[60vw] sm:w-[18vw] h-[10vh] sm:h-[15vh] shadow-md p-2 bg-zinc-50 rounded-md flex items-center justify-between sm:justify-center gap-5">
+                            <p
+                                class="lg:font-semibold text-xs lg:text-base text-slate-600">PATIENT</p>
+                            <img
+                                class="w-[5vw] sm:w-[3vw] shadow shadow-yellow-700 shadow-lg rounded-full py-2 px-1"
+                                src="/static/images/patient.svg" alt>
+                        </a>
+
+                    </div>
+                    <div
+                        class="child2 flex flex-col items-center justify-between sm:justify-center sm:flex-row   gap-5 text-center">
+
+                        <a href="{% url 'upcoming_consultations' %}"
+                            class="anchor  w-[60vw] sm:w-[18vw] h-[10vh] sm:h-[15vh] shadow-md p-2 bg-zinc-50 rounded-md flex items-center justify-between sm:justify-center gap-5">
+                            <p
+                                class="lg:font-semibold text-xs lg:text-base text-slate-600">UPCOMING
+                                CONSULTATION</p>
+                            <img
+                                class="w-[5vw] sm:w-[3vw] shadow shadow-green-700 shadow-lg rounded-full py-2 px-1"
+                                src="/static/images/upcoming.png" alt>
+                        </a>
+                        <a href="{% url 'ongoing_consulations'  %}"
+                            class="anchor  w-[60vw] sm:w-[18vw] h-[10vh] sm:h-[15vh] shadow-md p-2 bg-zinc-50 rounded-md flex items-center justify-between sm:justify-center gap-5">
+                            <p
+                                class="lg:font-semibold text-xs lg:text-base text-slate-600">ONGOING
+                                CONSULTATION</p>
+                            <img
+                                class="w-[5vw] sm:w-[3vw] shadow shadow-blue-700 shadow-lg rounded-full py-2 px-1"
+                                src="/static/images/ongoing.png" alt>
+                        </a>
+                        <a href="{% url 'add_specialization' %}"
+                            class="anchor  w-[60vw] sm:w-[18vw] h-[10vh] sm:h-[15vh] shadow-md p-2 bg-zinc-50 rounded-md flex items-center justify-between sm:justify-center gap-5">
+                            <p
+                                class="lg:font-semibold text-xs lg:text-base text-slate-600">AMOUNT</p>
+                            <img
+                                class="w-[5vw] sm:w-[3vw] shadow shadow-red-700 shadow-lg rounded-full py-2 px-1"
+                                src="/static/images/amount.png" alt>
+                        </a>
+
+                    </div>
+                    <div class="image w-full h-[30vh] flex justify-center ">
+                        <img class=" " src="/static/images/dashboard_bg.png"
+                            alt>
+                    </div>
+                </div>
+            </div>
+            {% endblock %}
+
+            <!-- </div> -->
+
+        </div>
+        <script src="/static/js/logout.js"></script>
+        <script src="/static/js/navbar.js"></script>
+        <script src="{% static 'js/changeAdmin_password.js' %}"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        </body>
+    </html>

@@ -1,0 +1,175 @@
+{% extends 'amount/amount_dashboard.html' %}
+
+{% block content %}
+<div
+    class="lg:w-[80vw] w-full h-max flex flex-col items-center gap-4 sm:px-5 rounded-sm  lg:ml-[20vw] ml-0 ">
+
+    <div
+        class="top_bar bg-white w-full shadow-md  flex justify-end gap-2 items-center px-4 rounded-md">
+
+        <!-- Modal Structure -->
+        {% include 'Admin_rest.html' %}
+
+        <div class="   flex items-center gap-1 h-[9vh]">
+            <div
+                class="flex justify-center items-center relative  ">
+                <button id="toggleButton"
+                    class="border  hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full transition duration-700 ease-in-out ...">
+                    <img class=" rounded-full w-[2vw]"
+                        src="/static/images/logout/logging-out-2355227_1280.webp"
+                        alt>
+                </button>
+                <div id="hiddenButtonsContainer"
+                    class="hidden   bg-[#375450]  rounded-md w-[30vw]  sm:w-[15vw]  flex flex-col gap-5 text-white  absolute top-7 sm:top-11 right-1 shadow-md transition delay-150 hover:scale-110 duration-300 ...">
+                    <!-- Hidden buttons -->
+
+                    <div
+                        class="py-2 h-[6vh] relative rounded-t-md flex  justify-center bg-[#5a7571]">
+                        <img
+                            class="rounded-full bg-white w-[3vw] border-black absolute top-4"
+                            src="/static/images/title logo.png"
+                            alt>
+
+                    </div>
+                    <h1
+                        class="text-xs px-5 text-white font-bold">Admin</h1>
+
+                    <a href="{% url 'logout' %}">
+                        <button
+                            class=" text-white  text-xs  rounded mb-2 block transition ease-in-out delay-150   hover:-translate-y-1 hover:scale-110  px-5 duration-300 ...">
+                            <i class="fas fa-sign-out"></i> Sign
+                            out
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div
+        class="w-full h-full flex flex-col gap-8 lg:gap-20 items-center  sm:ml-7  ">
+        <div
+            class="child1  flex flex-col items-center justify-center sm:flex-row gap-5 text-center lg:mt-10 ">
+
+            <a href="{% url 'patient_paymentdetails' %}"
+                class="anchor w-[60vw] sm:w-[17vw] h-[4vh] sm:h-[6vh] shadow-sm p-2 bg-zinc-50 rounded-md flex items-center justify-center  gap-5 ">
+                <p
+                    class="roboto-light font-semibold text-slate-600 text-xs lg:text-sm">PATIENT
+                    PAYMENT DETAILS</p>
+                <img src="/static/images/amount/transaction-history.png" alt
+                    class="w-[6vw] sm:w-[3vw] shadow shadow-slate-700 shadow-lg rounded-full py-2 px-1">
+            </a>
+            <a href="{% url 'payments_tobedone' %}"
+                class="anchor w-[60vw] sm:w-[17vw] h-[4vh] sm:h-[6vh] shadow-sm p-2 bg-zinc-50 rounded-md flex items-center justify-center  gap-5">
+                <p
+                    class="roboto-light font-semibold text-slate-600 text-xs  lg:text-sm">PAYMENTS
+                    TO BE DONE</p>
+                <img src="/static/images/amount/list.png" alt
+                    class="w-[6vw]  sm:w-[3vw] shadow shadow-slate-700 shadow-lg rounded-full py-2 px-1">
+            </a>
+            <a href="{% url 'offlineDebitPayments' %}"
+                class="anchor w-[60vw] sm:w-[17vw] h-[4vh] sm:h-[6vh] shadow-sm p-2 bg-zinc-50 rounded-md flex items-center justify-center   gap-5">
+                <p
+                    class="roboto-light font-semibold text-slate-600 text-xs lg:text-sm">DEBITED
+                    PAYMENT</p>
+                <img src="/static/images/amount/card.png" alt
+                    class="w-[5vw] sm:w-[3vw] shadow shadow-slate-700 shadow-lg rounded-full py-2 px-1">
+            </a>
+            <a href="{% url 'set_commission' %}"
+                class="anchor w-[60vw] sm:w-[17vw] h-[4vh] sm:h-[6vh] shadow-sm p-2 bg-zinc-50 rounded-md flex items-center justify-center  gap-5">
+                <p
+                    class="roboto-light font-semibold text-slate-600 text-xs lg:text-sm">SET
+                    COMMISSION AMOUNT</p>
+                <img src="/static/images/amount/commision.png" alt
+                    class="w-[5vw] sm:w-[3vw] shadow shadow-slate-700 shadow-lg rounded-full py-2 px-1">
+            </a>
+        </div>
+
+        <div
+            class="child2 flex flex-col items-center justify-between sm:justify-center sm:flex-row   gap-5 text-center">
+
+            <a href="{% url 'chatbot_payment' %}"
+                class="anchor w-[60vw] sm:w-[17vw] h-[4vh] sm:h-[6vh] shadow-sm p-2 bg-zinc-50 rounded-md flex items-center justify-center  gap-5">
+                <p
+                    class="roboto-light font-semibold text-slate-600 text-xs lg:text-sm">SET
+                    CHATBOT PAYMENT</p>
+                <img src="/static/images/amount/chatbot.png" alt
+                    class="w-[5vw] sm:w-[3vw] shadow shadow-slate-700 shadow-lg rounded-full py-2 px-1">
+            </a>
+            <a href="{% url 'chatbot_paiddetails' %}"
+                class="anchor w-[60vw] sm:w-[17vw] h-[4vh] sm:h-[6vh] shadow-sm p-2 bg-zinc-50 rounded-md flex items-center justify-center  gap-5">
+                <p
+                    class="roboto-light font-semibold text-slate-600 text-xs lg:text-sm">
+                    CHATBOT
+                    PAID DETAILS</p>
+                <img src="/static/images/amount/bills.png" alt
+                    class="w-[5vw] sm:w-[3vw] shadow shadow-slate-700 shadow-lg rounded-full py-2 px-1 ">
+            </a>
+            <a href="{% url 'setoffline_chat' %}"
+                class="anchor w-[60vw] sm:w-[17vw] h-[4vh] sm:h-[6vh] shadow-sm p-2 bg-zinc-50 rounded-md flex items-center justify-center  gap-5">
+                <p
+                    class="roboto-light font-semibold text-slate-600 text-xs lg:text-sm">SET
+                    OFFLINE
+                    CHAT</p>
+                <img src="/static/images/amount/no-wifi.png" alt
+                    class="w-[5vw] sm:w-[3vw] shadow shadow-slate-700 shadow-lg rounded-full py-2 px-1">
+            </a>
+            <a href="{% url 'offline_patient_payment_details' %}"
+                class="anchor w-[60vw] sm:w-[17vw] h-[4vh] sm:h-[6vh] shadow-sm p-2 bg-zinc-50 rounded-md flex items-center justify-center  gap-5">
+                <p
+                    class="roboto-light font-semibold text-slate-600 text-xs lg:text-sm">OFFLINE
+                    PATIENT PAYMENT DETAILS</p>
+                <img src="/static/images/amount/credit-card.png" alt
+                    class="w-[5vw] sm:w-[3vw] shadow shadow-slate-700 shadow-lg rounded-full py-2 px-1">
+            </a>
+        </div>
+
+        <!-- <div class="child3 flex flex-col items-center justify-between  sm:flex-row justify-between  gap-5 text-center ">
+        </div> -->
+    </div>
+
+    {% block headings %}
+    <h1
+        class="w-full roboto-light text-2xl sm:text-5xl font-medium text-[#142d4c]  py-5 text-center">
+        CHATBOT PADID DETAILS</h1>
+    {% endblock %}
+    <div
+        class="w-full overflow-y-auto flex flex-col justify-center items-center py-3">
+        {% block amount %}
+
+        <table class=" mb-10 ">
+            <thead>
+                <th class=" w-fit   text-xs sm:text-base py-2 sm:px-5">SL
+                    NO</th>
+                <th
+                    class=" w-fit sm:w-full  text-xs sm:text-base py-2 sm:px-5">Date</th>
+                <!-- <th class=" w-fit sm:w-full text-xs sm:text-base py-2 sm:px-14 ">Doctor name</th> -->
+                <th
+                    class=" w-fit sm:w-full text-xs sm:text-base py-2 sm:px-14 ">No
+                    of Questions</th>
+                <th
+                    class=" w-fit sm:w-full text-xs sm:text-base py-2 sm:px-14 ">
+                    Fee</th>
+            </thead>
+            <tbody>
+
+                {%for items in data %}
+                <tr>
+                    <td class="border px-4 py-2 text-center">{{ forloop.counter}}</td>
+                    <td class="border sm:px-4 py-2 text-center"> {{items.Current_date }}</td>
+                    <!-- <td class="border sm:px-4 py-2 text-center">{{ items.doctor_name }} </td> -->
+                    <td
+                        class="border sm:px-4 py-2 text-center">{{items.No_of_questions}}
+                    </td>
+                    <td class="border sm:px-4 py-2 text-center">{{items.online_fee }} </td>
+
+                </tr>
+                {%endfor%}
+
+            </tbody>
+        </table>
+
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

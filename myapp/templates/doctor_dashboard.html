@@ -1,0 +1,113 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+
+<div
+    class="lg:w-[80vw] w-full h-max flex flex-col items-center gap-4 sm:px-5 rounded-sm  lg:ml-[20vw] ml-0 ">
+
+    <div
+        class="top_bar bg-white w-full shadow-md flex justify-between items-center px-4 rounded-md ">
+        <div class="add_online_offline flex items-center bg-yellow-300 hover:bg-yellow-400 border border-yellow-500">
+            <button>Add Offline & Online</button>
+        </div>
+        <div class="logout_button flex items-center  flex justify-end gap-2">
+            <!-- <input class="h-[5vh]" type="text" placeholder="Search control" name id> -->
+
+            <!-- Modal Structure -->
+                    {% include 'Admin_rest.html' %}
+                            
+            <div class="   flex items-center gap-1 h-[9vh]">
+                
+                <div
+                    class="flex justify-center items-center relative  ">
+                    
+                    <button id="toggleButton"
+                        class="border  hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full transition duration-700 ease-in-out ...">
+                        <img class=" rounded-full w-[2vw]"
+                            src="/static/images/logout/logging-out-2355227_1280.webp"
+                            alt>
+                    </button>
+                    <div id="hiddenButtonsContainer"
+                        class="hidden   bg-[#375450]  rounded-md w-[30vw]  sm:w-[15vw]  flex flex-col gap-5 text-white  absolute top-7 sm:top-11 right-1 shadow-md transition delay-150 hover:scale-110 duration-300 ...">
+                        <!-- Hidden buttons -->
+
+                        <div
+                            class="py-2 h-[6vh] relative rounded-t-md flex  justify-center bg-[#5a7571]">
+                            <img
+                                class="rounded-full bg-white w-[3vw] border-black absolute top-4"
+                                src="/static/images/title logo.png"
+                                alt>
+
+                        </div>
+                        <h1
+                            class="text-xs px-5 text-white font-bold">Admin</h1>
+
+                        <a href="{% url 'logout' %}">
+                            <button
+                                class=" text-white  text-xs  rounded mb-2 block transition ease-in-out delay-150   hover:-translate-y-1 hover:scale-110  px-5 duration-300 ...">
+                                <i class="fas fa-sign-out"></i> Sign
+                                out
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div
+        class="child1  flex flex-col items-center justify-center sm:flex-row gap-5 text-center">
+
+        <a href="{% url 'add_doctors' %}"
+            class="anchor w-[60vw] sm:w-[17vw] h-[10vh] sm:h-[10vh] shadow-sm p-2 bg-zinc-50 rounded-md flex items-center justify-center  gap-5">
+            <p
+                class="roboto-light font-semibold text-slate-600 text-xs lg:text-sm">ADD
+                DOCTOR</p>
+            <svg
+                class="w-[5vw] sm:w-[3vw] shadow shadow-green-700 shadow-md rounded-full py-2 px-1"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path
+                    d="M96 0C60.7 0 32 28.7 32 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H96zM208 288h64c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16H144c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM512 80c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V80zM496 192c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm16 144c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V336z" /></svg>
+        </a>
+        <a href="{% url 'view_doctors' %}"
+            class="anchor w-[60vw] sm:w-[17vw] h-[10vh] sm:h-[10vh] shadow-sm p-2 bg-zinc-50 rounded-md flex items-center justify-center  gap-5">
+            <p
+                class="roboto-light font-semibold text-slate-600 text-xs lg:text-sm">VIEW
+                DOCTORS</p>
+            <svg
+                class="w-[5vw] sm:w-[3vw] shadow shadow-green-700 shadow-md rounded-full py-2 px-1"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path
+                    d="M320 64A64 64 0 1 0 192 64a64 64 0 1 0 128 0zm-96 96c-35.3 0-64 28.7-64 64v48c0 17.7 14.3 32 32 32h1.8l11.1 99.5c1.8 16.2 15.5 28.5 31.8 28.5h38.7c16.3 0 30-12.3 31.8-28.5L318.2 304H320c17.7 0 32-14.3 32-32V224c0-35.3-28.7-64-64-64H224zM132.3 394.2c13-2.4 21.7-14.9 19.3-27.9s-14.9-21.7-27.9-19.3c-32.4 5.9-60.9 14.2-82 24.8c-10.5 5.3-20.3 11.7-27.8 19.6C6.4 399.5 0 410.5 0 424c0 21.4 15.5 36.1 29.1 45c14.7 9.6 34.3 17.3 56.4 23.4C130.2 504.7 190.4 512 256 512s125.8-7.3 170.4-19.6c22.1-6.1 41.8-13.8 56.4-23.4c13.7-8.9 29.1-23.6 29.1-45c0-13.5-6.4-24.5-14-32.6c-7.5-7.9-17.3-14.3-27.8-19.6c-21-10.6-49.5-18.9-82-24.8c-13-2.4-25.5 6.3-27.9 19.3s6.3 25.5 19.3 27.9c30.2 5.5 53.7 12.8 69 20.5c3.2 1.6 5.8 3.1 7.9 4.5c3.6 2.4 3.6 7.2 0 9.6c-8.8 5.7-23.1 11.8-43 17.3C374.3 457 318.5 464 256 464s-118.3-7-157.7-17.9c-19.9-5.5-34.2-11.6-43-17.3c-3.6-2.4-3.6-7.2 0-9.6c2.1-1.4 4.8-2.9 7.9-4.5c15.3-7.7 38.8-14.9 69-20.5z" /></svg>
+        </a>
+        <a href="{% url 'approved_doctors' %}"
+            class="anchor w-[60vw] sm:w-[17vw] h-[10vh] sm:h-[10vh] shadow-sm p-2 bg-zinc-50 rounded-md flex items-center justify-center   gap-5">
+            <p
+                class="roboto-light font-semibold text-slate-600 text-xs lg:text-sm">APPROVED
+                DOCTORS</p>
+            <svg
+                class="w-[5vw] sm:w-[3vw] shadow shadow-green-700 shadow-md rounded-full py-2.5 px-1"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                <path
+                    d="M112 48a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm40 304V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V256.9L59.4 304.5c-9.1 15.1-28.8 20-43.9 10.9s-20-28.8-10.9-43.9l58.3-97c17.4-28.9 48.6-46.6 82.3-46.6h29.7c33.7 0 64.9 17.7 82.3 46.6l44.9 74.7c-16.1 17.6-28.6 38.5-36.6 61.5c-1.9-1.8-3.5-3.9-4.9-6.3L232 256.9V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V352H152zm136 16a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm211.3-43.3c-6.2-6.2-16.4-6.2-22.6 0L416 385.4l-28.7-28.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l40 40c6.2 6.2 16.4 6.2 22.6 0l72-72c6.2-6.2 6.2-16.4 0-22.6z" /></svg>
+        </a>
+        <a href="{% url 'blocked_doctors' %}"
+            class="anchor w-[60vw] sm:w-[17vw] h-[10vh] sm:h-[10vh] shadow-sm p-2 bg-zinc-50 rounded-md flex items-center justify-center  gap-5">
+            <p
+                class="roboto-light font-semibold text-slate-600 text-xs lg:text-sm">BLOCKED
+                DOCTORS</p>
+            <svg
+                class="w-[5vw] sm:w-[3vw] shadow shadow-green-700 shadow-md rounded-full py-3 px-1"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                <path
+                    d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H392.6c-5.4-9.4-8.6-20.3-8.6-32V352c0-2.1 .1-4.2 .3-6.3c-31-26-71-41.7-114.6-41.7H178.3zM528 240c17.7 0 32 14.3 32 32v48H496V272c0-17.7 14.3-32 32-32zm-80 32v48c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32V352c0-17.7-14.3-32-32-32V272c0-44.2-35.8-80-80-80s-80 35.8-80 80z" /></svg>
+        </a>
+    </div>
+    {% block heading %} {% endblock %}
+    <div
+        class="w-full overflow-y-auto flex flex-col justify-center items-center">
+        {% block doctor %}
+
+        {% endblock %}
+    </div>
+
+    {% endblock %}

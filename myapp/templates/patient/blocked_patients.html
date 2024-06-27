@@ -1,0 +1,142 @@
+{% extends 'patient_Dashboard.html' %}
+
+
+
+ {% block head %} <h1 class="roboto-light text-2xl sm:text-5xl font-medium text-[#142d4c] sm:py-3 text-center">BLOCKED PATIENTS</h1> {% endblock %}
+
+ {% block patient %}
+
+<div class="outer_wrapper  w-full sm:w-[76vw]">
+<div class="table_wrapper">
+    {% if patients %}
+    <table class="">
+        <thead>
+                <th class="roboto-light px-4 py-2">Sl No.</th>
+                <th class="roboto-light  px-4 py-2">Firstname</th>
+                <th class="roboto-light px-4 py-2">Lastname </th>
+                <th class="roboto-light px-4 py-2">Phone Number</th>
+                <th class="roboto-light px-4 py-2">Email</th>
+                <th class="roboto-light px-4 py-2">Gender</th>
+                <th class="roboto-light px-4 py-2">Address</th>
+                <th class="roboto-light px-4 py-2">Profile Pic</th>
+                <th class="roboto-light px-4 py-2">Status</th>
+                <th class="roboto-light px-4 py-2">Unblock</th>
+                <th class="roboto-light px-4 py-2">Delete</th>
+            </thead> 
+        <tbody>
+            {% for patient in patients %}
+            
+            <tr class>
+                <td class="border px-4 py-2">{{  forloop.counter }} </td>
+                <td class="border px-4 py-2">{{ patient.first_name }} </td>
+                <td class="border px-4 py-2">{{ patient.last_name }} </td>
+                <td class="border px-4 py-2">{{ patient.mobile }}</td>
+                <td class="border px-4 py-2">{{ patient.email }}</td>
+                <td class="border px-4 py-2">{{ patient.gender }}</td>
+                <td class="border px-4 py-2">{{ patient.address }}</td>
+            
+                    <td class="flex jusitify-center items-center"><img style="white-space: nowrap;" class="px-1 py-1 border border-slate-600  object-fill h-[10vh] w-full ..." src="{{ patient.image.url }}"></td>
+             
+               {% if patient.is_blocked %}
+               <td class="border px-4 py-2">Blocked</td>
+               {% else %}
+               <td class="border px-4 py-2">nill</td>
+               {% endif %}
+               <td class="border px-4 py-2">
+                   <form action="{% url 'unblock_patients' patient.id %}" method="post">
+                       {% csrf_token %}
+                       <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-2">Unblock</button>
+                   </form>
+               </td>
+              
+    
+                <td class="border px-4 py-2">
+                        <button data-doctor-id="{{ patient.id }}" class=" bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2 delete-doctor-btn">
+                            <a >Delete</a>
+                        </button>
+                        
+                        <!-- modal -->
+                        <div id="delete-modal" tabindex="-1" aria-hidden="true"
+                            class="hidden overflow-y-auto overflow-x-hidden flex justify-center items-center  fixed  top-0 right-0 left-0 z-50 w-full  h-full   bg-gray-900 bg-opacity-50 modal backdrop fade in">
+                            <div
+                                class="flex flex-col gap-7 py-5 mx-auto p-4 w-full max-w-xl md:shadow-lg rounded-xl bg-white ">
+                                <div class="mb-4 text-center">
+                                    <p
+                                        class="text-xl  text-gray-700">Are
+                                        you sure you want to delete?</p>
+                                </div>
+                                <div class="flex justify-center space-x-4">
+                                    <button type="button"
+                                        data-modal-toggle="delete-modal"
+                                        class="inline-flex items-center px-4  bg-gray-800 text-white  rounded-lg shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cancel-delete-btn">
+                                        No
+                                    </button>
+                                    <button type="button" data-doctor-id
+                                        id="confirm-delete-btn"
+                                        class="inline-flex items-center px-4  bg-red-500 text-white  rounded-lg shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        <a
+                                        href="{% url 'delete_patients' patient.id %}">
+                                        Yes</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- end of the modal bod -->
+
+                    </td>
+            </tr>
+           
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% else %}
+<p>No Patients found.</p>
+{% endif %}
+      
+<script>
+     const deleteButtons = document.querySelectorAll('.delete-doctor-btn');
+
+deleteButtons.forEach(button => {
+  button.addEventListener('click', function() {
+    // Get the doctor ID from the button data attribute
+    const doctorId = this.dataset.doctorId;
+
+    // Set the doctor ID on the confirmation button for later use
+    const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+    confirmDeleteBtn.dataset.doctorId = doctorId;
+
+    // Open the modal
+    document.getElementById('delete-modal').classList.remove('hidden');
+  });
+});
+
+// Close modal on cancel button click
+const cancelDeleteBtn = document.querySelector('.cancel-delete-btn');
+cancelDeleteBtn.addEventListener('click', function() {
+  document.getElementById('delete-modal').classList.add('hidden');
+});
+
+// Handle delete confirmation (replace with your actual deletion logic)
+const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+confirmDeleteBtn.addEventListener('click', function() {
+  const doctorId = this.dataset.doctorId;
+
+  // Simulate deletion (replace with your actual API call or form submission)
+  console.log(`Deleting doctor with ID: ${doctorId}`);
+
+  // Close the modal after simulated deletion
+  document.getElementById('delete-modal').classList.add('hidden');
+});
+
+</script>
+
+</div>
+</div>
+
+
+{% endblock %}
+
+
+

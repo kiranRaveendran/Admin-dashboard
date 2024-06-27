@@ -1,0 +1,49 @@
+{% extends 'patient_Dashboard.html' %}
+
+ 
+
+ {% block patient %}
+    <h1 class="text-2xl sm:text-5xl font-semibold text-[#142d4c] sm:py-3 text-center">REVIEWS</h1> 
+
+<div class="outer_wrapper  w-full sm:w-[71vw]">
+  <div class="table_wrapper">
+      {% if doctors %}
+       <table class="">
+            <thead>
+                <th class="roboto-light px-4 py-2">Sl.No</th>
+                <th class="roboto-light px-4 py-2">Doctor Name</th>
+                <th class="roboto-light px-4 py-2">Doctor Phone Number </th>
+                <th class="roboto-light px-4 py-2">Doctor Specialisation</th>
+                <th class="roboto-light px-4 py-2">Doctor feedback Count</th>
+                <th class="roboto-light px-4 py-2">View Reviews</th>
+            </thead>
+        <tbody>
+            {% for doctor in doctors %}
+            {% if doctor.status and not doctor.isblocked %}
+            <tr class>
+                <td class="border px-4 py-2 text-center">{{ forloop.counter }} </td>
+                <td class="border px-4 py-2  text-center">{{ doctor.first_name }} {{ doctor.last_name }} </td>
+                <td class="border px-4 py-2  text-center">{{ doctor.mobile }}</td>
+                <td class="border px-4 py-2  text-center">{{ doctor.specialisation }}</td>
+                <td class="border px-4 py-2  text-center">{{ doctor.feedback_count }}</td>
+                
+                <td class="border px-8 py-2">
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2"><a
+                            href="{% url 'view_reviews' doctor.id %}">viewReviews</a></button></td>
+                
+            </tr>
+            {%endif%}
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% else %}
+<p>No doctors found.</p>
+{% endif %}
+</div>
+</div>
+
+
+
+{% endblock %}

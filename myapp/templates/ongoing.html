@@ -1,0 +1,95 @@
+{% extends 'dashboard.html' %}
+{% block  content %}
+
+<div
+    class="lg:w-[80vw] w-full h-max   flex flex-col items-center gap-4 sm:px-5 rounded-sm lg:ml-[20vw] ml-0">
+
+    <div
+        class="top_bar bg-white w-full   shadow-md  flex justify-end gap-2 items-center px-4 rounded-md">
+        
+
+        <!-- Modal Structure -->
+                    {% include 'Admin_rest.html' %}
+                            
+
+        <div class="   flex items-center gap-1 h-[9vh]">
+            <div
+                class="flex justify-center items-center relative  ">
+                <button id="toggleButton"
+                    class="border  hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full transition duration-700 ease-in-out ...">
+                    <img class=" rounded-full w-[2vw]"
+                        src="/static/images/logout/logging-out-2355227_1280.webp"
+                        alt>
+                </button>
+                <div id="hiddenButtonsContainer"
+                                    class="hidden   bg-[#375450]  rounded-md w-[30vw]  sm:w-[15vw]  flex flex-col gap-5 text-white  absolute top-7 sm:top-11 right-1 shadow-md transition delay-150 hover:scale-110 duration-300 ...">
+                                    <!-- Hidden buttons -->
+
+                                    <div
+                                        class="py-2 h-[6vh] relative rounded-t-md flex  justify-center bg-[#5a7571]">
+                                        <img
+                                            class="rounded-full bg-white w-[3vw] border-black absolute top-4"
+                                            src="/static/images/title logo.png"
+                                            alt>
+
+                                    </div>
+                                    <h1
+                                        class="text-xs px-5 text-white font-bold">Admin</h1>
+
+                                    <a href="{% url 'logout' %}">
+                                        <button
+                                            class=" text-white  text-xs  rounded mb-2 block transition ease-in-out delay-150   hover:-translate-y-1 hover:scale-110  px-5 duration-300 ...">
+                                            <i class="fas fa-sign-out"></i> Sign
+                                            out
+                                        </button>
+                                    </a>
+                                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% block heading  %}
+<h1 class="roboto-light text-2xl sm:text-5xl font-medium text-[#142d4c] sm:py-8 text-center">ONGOING CONSULTATION</h1>
+{% endblock  %}
+
+<div class="outer_wrapper  w-full sm:w-auto">
+   <div class="table_wrapper "> 
+      {% if ongoing %}
+       <table>
+            <thead>
+                <th class="roboto-light px-16 py-2">Sl.No</th>
+                <th class="roboto-light px-16 py-2">Doctor Name</th>
+                <th class="roboto-light px-16 py-2">Patient Name</th>
+                <th class="roboto-light px-16 py-2">Time</th>
+                <th class="roboto-light px-16 py-2">Date</th>
+                
+               
+            </thead>
+        <tbody>
+            {% for consultation in ongoing %}
+            
+            <tr>
+                <td class="border px-4 py-2 text-center">{{ forloop.counter }} </td>
+                <td class="border px-4 py-2  text-center">{{  consultation.doctor_name.first_name }} {{ consultation.doctor_name.last_name }}</td>
+                <td class="border px-4 py-2  text-center">{{ consultation.patient_name.first_name }} {{ consultation.patient_name.last_name }}</td>
+                <td class="border px-4 py-2  text-center">{{ consultation.time }}</td>
+                <td class="border px-4 py-2  text-center">{{ consultation.date }}</td>
+               
+               
+            </tr>
+         
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% else %}
+<p>No Ongoingconsultations found.</p>
+{% endif %}
+</div>
+</div>
+
+
+</div>
+{% endblock %}

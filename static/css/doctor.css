@@ -1,0 +1,39 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap');
+/* *{
+      font-family: "Hind", sans-serif;
+      color: red;
+} */ 
+
+.outer_wrapper {
+    /* border: 1px solid #f95959; */
+    border-radius: 5px;
+    overflow-x: scroll;
+    
+    /* max-width: 100%; */
+    
+}
+
+th {
+    position: sticky;
+    top: 0px;
+    color: white;
+    /* width: 100px; */
+    white-space: nowrap;
+    background-color: #658e84;
+    border: 1px solid #385170;
+    
+}
+
+ td {
+    /* border: 1px solid #385170; */
+     border: 1px solid rgb(214, 214, 214);
+ }
+
+ thead {
+     border-radius: 5px;
+     
+ }  
+ tr{
+    background-color: #ffffff;
+    
+ }  

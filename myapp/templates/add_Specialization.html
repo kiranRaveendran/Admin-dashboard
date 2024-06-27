@@ -1,0 +1,141 @@
+{% extends 'dashboard.html'%}
+{% load static %}
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<div
+    class="w-full h-max  flex flex-col items-center gap-4 sm:px-5 rounded-sm sm:ml-[17vw] lg:ml-[20vw] ml-0">
+    <div
+        class="top_bar bg-white w-full   shadow-md  flex justify-end gap-2 items-center px-4 rounded-md">
+        
+        <!-- Modal Structure -->
+                    {% include 'Admin_rest.html' %}
+                            
+
+
+        <div class="flex items-center gap-1 h-[9vh]">
+            <div
+                class="flex justify-center items-center relative  ">
+                <button id="toggleButton"
+                    class="border  hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full transition duration-700 ease-in-out ...">
+                    <img class=" rounded-full w-[2vw]"
+                        src="/static/images/logout/logging-out-2355227_1280.webp"
+                        alt>
+                </button>
+                <div id="hiddenButtonsContainer"
+                    class="hidden   bg-[#375450]  rounded-md w-[30vw]  sm:w-[15vw]  flex flex-col gap-5 text-white  absolute top-7 sm:top-11 right-1 shadow-md transition delay-150 hover:scale-110 duration-300 ...">
+                    <!-- Hidden buttons -->
+
+                    <div
+                        class="py-2 h-[6vh] relative rounded-t-md flex  justify-center bg-[#5a7571]">
+                        <img
+                            class="rounded-full bg-white w-[3vw] border-black absolute top-4"
+                            src="/static/images/title logo.png"
+                            alt>
+
+                    </div>
+                    <h1
+                        class="text-xs px-5 text-white font-bold">Admin</h1>
+
+                    <a href="{% url 'logout' %}">
+                        <button
+                            class=" text-white  text-xs  rounded mb-2 block transition ease-in-out delay-150   hover:-translate-y-1 hover:scale-110  px-5 duration-300 ...">
+                            <i class="fas fa-sign-out"></i> Sign
+                            out
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block heading %}
+    <h1
+        class="roboto-light text-2xl sm:text-5xl font-medium text-[#142d4c] sm:py-3 text-center">ADD
+        SPECIALIZATION </h1>
+    {% endblock %}
+    <div class="adding_divd">
+        <form action="{% url 'add_specialization' %}" method="POST"
+            class="py-5 sm:w-[35vw]  flex flex-col items-center gap-4 border border-slate-300 rounded-md shadow-md bg-red-300">
+            {% csrf_token %}
+            <h1 class="text-xl font-semibold">Specialization</h1>
+            {{form.name}}
+            <!-- form.as_ul :  -->
+            <button
+                class="ml-3 bg-violet-600 hover:bg-violet-800 rounded-md px-5 w-fit  mb-3 text-white   font-medium"
+                type="submit">submit</button>
+        </form>
+    </div>
+
+    <!-- Updating form  -->
+    <div id="specialization_edit_button">
+
+    </div>
+    <!-- modal -->
+    <div id="delete-modal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden flex justify-center items-center  fixed  top-0 right-0 left-0 z-50 w-full  h-full   bg-gray-900 bg-opacity-50 modal backdrop fade in">
+        <div
+            class="flex flex-col gap-7 py-5 mx-auto p-4 w-full max-w-xl rounded-xl  bg-white">
+            <form id="updating_form"
+                class="flex flex-col items-center gap-6  show-modal sm:py-5">
+                <h1 class="text-xl">Update Specialization Here</h1>
+                {% csrf_token %}
+                <input type="text" id="name" name="name" placeholder="Enter specialization" class="form-control block w-2/3 py-2 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-md border border-gray-300 rounded-md">               
+                <div class="buttons flex gap-10">
+                <button id="save_button" class="bg-green-400 hover:bg-green-500 rounded-md px-2 py-1" type="submit">Update</button>
+                <button class=" bg-yellow-400 hover:bg-yellow-500 rounded-md px-2 py-1" onclick="add_hidden()"  type="submit">cancel</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    <!-- end of the modal body -->
+
+    <div class="outer_wrapper w-auto flex justify-center ">
+
+        <div class="table_wrapper text-xs sm:text-base "
+            id="specialisation_table">
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/specialization.js' %}"></script>
+<script>
+    var ppk
+function primary(p){
+        ppk=p;
+        }
+    const form = document.getElementById ('updating_form');
+    form.addEventListener("submit", submithandler);
+    function submithandler(e) {
+        e.preventDefault();
+        var formData = $(this).serialize();
+            //var pk = $('#save_button').attr('data-pk');
+        
+        $.ajax({
+            type: 'POST',
+            url: '/updateSpecialization/' + ppk + '/',  // Replace 'your_post_url_here' with the actual URL to which you want to send the POST request
+            data: formData,
+            success: function(response){
+                Specialization_load_table();
+                add_hidden()
+            },
+            error: function(xhr, status, error){
+                // Handle error response here
+                console.error('Error:', error);
+            }
+        });
+    }
+
+    function Specialization_load_table(){
+        
+        var table_container="specialisation_table";
+        var table_data_url = "{% url 'load_specialization' %}";
+        $.get(table_data_url, function(data, status){
+            document.getElementById(table_container).innerHTML = data;
+        });
+    }
+    Specialization_load_table()
+</script>
+
+{% endblock %}

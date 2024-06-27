@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="{% static 'images/title logo.png' %}">
+        
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>CureAndSave Admin</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    
+    <body class="bg-gradient-to-l from-indigo-200">
+        <div class="login_body ">
+            <div class=" flex flex-col ">
+                <div class="flex justify-center sm:justify-start">
+                    <img
+                        class="w-[40vw] sm:w-[20vw] py-5 sm:py-10 sm:ml-32 flex"
+                        src="{% static 'images/logo.png' %}"
+                        alt>
+                </div>
+                <div
+                    class="flex flex-col-reverse sm:flex-row justify-center items-center justify-evenly sm:h-[60vh]">
+                    <form action="{% url 'login_page' %}" method="POST" id="loginForm" enctype="multipart/form-data" class=" bg-white  h-[25] sm:h-fit w-fit sm:w-[30vw] rounded-xl shadow-xl flex flex-col items-center justify-center  border border-slate-300 py-3 sm:py-10 gap-5 sm:gap-5 px-2 sm:px-7">
+                        <h1 class="text-4xl text-slate-600 text-center font-semibold mb-4">Admin Login</h1>
+                     {% csrf_token %}
+                    <!-- {{form.as_p}} -->
+                     <p class=" border border-slate-300 w-[20vw] ">
+                            {{form.username}}</p>
+                        <p
+                            class=" border border-slate-300 w-[20vw] flex justify-between items-center ">
+                            {{form.password}}
+                            <i
+                                class="fas fa-eye cursor-pointer text-blue-800 px-3"
+                                onclick="togglePasswordVisibility('password')"></i> </p>
+                       <div class="mt-4">
+                        <button
+                            class="bg-blue-500 w-fit px-10 py-2   rounded-md">Login</button></div>
+                            <div><p id="error-message" class="text-red-500 font-bold"></p></div>
+                    </form>
+                    
+                    <div class="login_img ">
+                        <img
+                            class="w-full sm:h-[60vh] py-10 sm:py-0 sm:w-base px-4 sm:px-0"
+                            src="{% static 'images/login.svg' %}" alt>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="{% static 'js/login.js' %}"></script>
+    </body>
+</html>

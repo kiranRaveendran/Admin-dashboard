@@ -1,0 +1,83 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("", views.login_page, name='login_page'),
+    path('doctor_Dashboard/', views.doctor_Dashboard, name='doctor_Dashboard'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('view_reviews/<int:doctor_id>/',
+         views.view_reviews, name="view_reviews"),
+    path('delete_reviews/<int:review_id>/',
+         views.delete_reviews, name="delete_reviews"),
+    path('ongoing_consulations/', views.ongoing_consulations,
+         name='ongoing_consulations'),
+    path('upcoming_consultations/', views.upcoming_consultations,
+         name='upcoming_consultations'),
+
+    # /////////////////////Specialization section/////////////////////////
+    path('specialization/', views.specialization, name='specialization'),
+    path('add_specialization/', views.add_specialization,
+         name='add_specialization'),
+    path('deleteSpecialization/<int:pk>/', views.deleteSpecialization,
+         name='deleteSpecialization'),
+    path('updateSpecialization/<int:pk>/', views.updateSpecialization,
+         name='updateSpecialization'),
+    path('load-specialization', views.load_specialization,
+         name='load_specialization'),
+    path('specialization_edit_button/<int:pk>/', views.specialization_edit_button,
+         name='specialization_edit_button'),
+    # /////////////////////// Amount module///////////////////////
+    path('amount_dashboard/', views.amount_dashboard, name='amount_dashboard'),
+    path('patient_paymentdetails/', views.patient_paymentdetails,
+         name='patient_paymentdetails'),
+    path('payments_tobedone/', views.payments_tobedone, name="payments_tobedone"),
+    path('debited_payment/', views.debited_payment, name="debited_payment"),
+    path('set_commission/', views.set_commission, name="set_commission"),
+    path('chatbot_payment/', views.SetOnline_ChartbotPayment_function,
+         name="chatbot_payment"),
+
+    path('chatbot_paiddetails/', views.chatbot_paiddetails,
+         name="chatbot_paiddetails"),
+    path('setoffline_chat/', views.setoffline_chat,
+         name="setoffline_chat"),
+    path('offline_patient_payment_details/', views.offline_patient_payment_details,
+         name="offline_patient_payment_details"),
+    path('offlineDebitPayments/', views.offlineDebitPayments,
+         name='offlineDebitPayments'),
+    path('onlineDebitPayments/', views.onlineDebitPayments,
+         name='onlineDebitPayments'),
+
+    path('change_password/', views.change_password, name='change_password'),
+    #     path('offline-consultation/', views.offline_patient_payment_details,
+    #          name='offline_consultation'),
+    #     path('get-online-fee/', views.get_online_fee, name='get_online_fee'),
+
+
+    # /////////////////// Doctor module  ////////
+    path('add_doctors/', views.add_doctors, name='add_doctors'),
+    path('view_doctors/', views.view_doctors, name='view_doctors'),
+    path('delete_doctors/<int:pk>/', views.delete_doctors, name='delete_doctors'),
+    path('approved/<int:pk>/',
+         views.approved, name='approved'),
+    path('approved_doctors/',
+         views.approved_doctors, name='approved_doctors'),
+    path('block/<int:pk>/', views.block, name='block'),
+    path('blocked_doctors/', views.blocked_doctors, name="blocked_doctors"),
+    path('unblock/<int:pk>', views.unblock, name="unblock"),
+    path('logout/', views.logout, name='logout'),
+
+    # /////////////////////patients module////////////////////////
+    path('patient_Dashboard/', views.patient_Dashboard, name='patient_Dashboard'),
+    path('view_patients/', views.view_patients, name="view_patients"),
+    path('patients_Feedback/', views.patients_Feedback, name='patients_Feedback'),
+    path('view_reviews/<int:doctor_id>',
+         views.view_reviews, name="view_reviews"),
+    path('delete_review/<int:review_id>/',
+         views.delete_reviews, name="delete_reviews"),
+    path('block_p/<int:patient_id>/', views.block_p, name="block_p"),
+    path('blocked_patients/', views.blocked_patients, name="blocked_patients"),
+    path('delete_patients/<int:patient_id>/',
+         views.delete_patients, name="delete_patients"),
+    path('unblock_patients/<int:patient_id>/',
+         views.unblock_patients, name="unblock_patients"),
+]
